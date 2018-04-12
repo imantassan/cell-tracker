@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CellTracker", "CellTracker\CellTracker.csproj", "{AF1F2391-2E5A-46AF-8DF9-3E2C3646CB79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellTracker.Repository", "CellTracker.Repository\CellTracker.Repository.csproj", "{CA165798-6CBE-459D-A5C0-1608506D3457}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CellTracker.Repository", "CellTracker.Repository\CellTracker.Repository.csproj", "{CA165798-6CBE-459D-A5C0-1608506D3457}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellTracker.Services", "CellTracker.Services\CellTracker.Services.csproj", "{EA7D7531-D48E-4632-8DB5-1D5E9E4E377E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{CA165798-6CBE-459D-A5C0-1608506D3457}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA165798-6CBE-459D-A5C0-1608506D3457}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA165798-6CBE-459D-A5C0-1608506D3457}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA7D7531-D48E-4632-8DB5-1D5E9E4E377E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA7D7531-D48E-4632-8DB5-1D5E9E4E377E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA7D7531-D48E-4632-8DB5-1D5E9E4E377E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA7D7531-D48E-4632-8DB5-1D5E9E4E377E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

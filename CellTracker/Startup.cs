@@ -1,10 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using CellTracker.Helpers;
+using CellTracker.Repository;
+using CellTracker.Repository.Repository;
+using CellTracker.Services;
+using CellTracker.Services.Dto;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,6 +25,23 @@ namespace CellTracker
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddEntityFrameworkSqlServer();
+
+            services.AddDbContext<LogDbContext>(
+                _ =>
+                {
+                    _.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                });
+
+            services.AddScoped<IDbContext>(
+                provider =>
+                    provider.GetService<LogDbContext>()?.MigrateOnce(context => { context.Seed(); })
+            );
+
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(ILogService<CallRecordDto>), typeof(CallLogService));
+            services.AddScoped(typeof(ILogService<SmsRecordDto>), typeof(SmsLogService));
+
             services.AddMvc();
         }
 
