@@ -12,9 +12,10 @@ using System;
 namespace CellTracker.Repository.Migrations
 {
     [DbContext(typeof(LogDbContext))]
-    partial class LogDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180412141133_AddIndex")]
+    partial class AddIndex
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

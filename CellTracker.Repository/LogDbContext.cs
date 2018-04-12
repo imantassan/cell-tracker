@@ -43,6 +43,9 @@ namespace CellTracker.Repository
                 .HasDiscriminator<string>(nameof(LogRecord.CellActionTypeString))
                 .HasValue<SmsRecord>(CellActionType.Sms.ToString())
                 .HasValue<CallRecord>(CellActionType.Call.ToString());
+
+            modelBuilder.Entity<LogRecord>()
+                .HasIndex(x => new { x.SubscriberId, x.CellActionTypeString });
         }
 
         public DbSet<T> GetDbSet<T>()
