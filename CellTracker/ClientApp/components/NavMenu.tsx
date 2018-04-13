@@ -24,7 +24,7 @@ export class NavMenu extends React.Component<{}, {}> {
                         </li>
                         <li>
                             <NavLink to={ '/celllog' } activeClassName='active'>
-                                <span className='glyphicon glyphicon-th-list'></span> Cell Log
+                                <span className='glyphicon glyphicon-th-list'></span> Cell Tracker Log
                             </NavLink>
                         </li>
                     </ul>

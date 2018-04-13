@@ -5,5 +5,5 @@ import { CellLog, Home } from './components';
 
 export const routes = <Layout>
     <Route exact path='/' component={ Home } />
-    <Route path='/celllog/:dateFrom?/:dateTo?' component={ CellLog } />
+    <Route path='/celllog' component={ CellLog } />
 </Layout>;

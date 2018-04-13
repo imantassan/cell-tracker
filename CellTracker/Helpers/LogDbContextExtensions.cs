@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using CellTracker.Common.Helpers;
 using CellTracker.Repository;
 using CellTracker.Repository.Entities;
 
@@ -30,7 +31,7 @@ namespace CellTracker.Helpers
                     dbSet.Add(
                         new CallRecord
                         {
-                            Duration = TimeSpan.FromSeconds(RandomDataGenerator.GetNumber(0, 3600)),
+                            Duration = RandomDataGenerator.GetNumber(0, 3600),
                             SubscriberId = subscribers[RandomDataGenerator.GetNumber(0, subscribers.Count)],
                             Timestamp = RandomDataGenerator.GetDate()
                         });

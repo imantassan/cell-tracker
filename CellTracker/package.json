@@ -18,6 +18,7 @@
     "aspnet-webpack-react": "^3.0.0",
     "awesome-typescript-loader": "3.2.1",
     "bootstrap": "3.3.7",
+    "bootstrap-daterangepicker": "^2.1.30",
     "css-loader": "0.28.4",
     "domain-task": "^3.0.3",
     "event-source-polyfill": "0.0.9",
@@ -27,6 +28,8 @@
     "jquery": "3.2.1",
     "node-noop": "1.0.0",
     "react": "15.6.1",
+    "react-bootstrap-daterangepicker": "^4.1.0",
+    "react-date-range": "^0.9.4",
     "react-dom": "15.6.1",
     "react-hot-loader": "3.0.0-beta.7",
     "react-redux": "5.0.5",
@@ -40,5 +43,9 @@
     "webpack": "2.5.1",
     "webpack-hot-middleware": "2.18.2",
     "webpack-merge": "4.1.0"
+  },
+  "dependencies": {
+    "@types/react-bootstrap-daterangepicker": "0.0.23",
+    "@types/react-date-range": "^0.94.2"
   }
 }

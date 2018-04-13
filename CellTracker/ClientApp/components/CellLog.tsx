@@ -3,32 +3,21 @@ import { RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../store';
 import * as LogState from '../store/Log';
+import { DateRange, defaultRanges } from 'react-date-range';
+import * as moment from 'moment';
 
 // At runtime, Redux will merge together...
 type LogProps =
     LogState.LogState        // ... state we've requested from the Redux store
     & typeof LogState.actionCreators      // ... plus action creators we've requested
-    & RouteComponentProps<{ dateFrom: string, dateTo: string }>; // ... plus incoming routing parameters
+    & RouteComponentProps<{}>; // ... plus incoming routing parameters
 
+class CellLog extends React.Component<LogProps, { dateFrom?: Date, dateTo?: Date }> {
 
-class CellLog extends React.Component<LogProps, {}> {
+    constructor(props: LogProps) {
+        super(props);
 
-    componentWillMount() {
-        const dateFrom = (this.props.match.params.dateFrom
-            ? new Date(this.props.match.params.dateFrom)
-            : this.getTodayDate()).toISOString();
-        const dateTo = (this.props.match.params.dateTo ? new Date(this.props.match.params.dateTo) : this.getTodayDate())
-            .toISOString();
-        this.props.requestCallLog(dateFrom, dateTo);
-    }
-
-    componentWillReceiveProps(nextProps: LogProps) {
-        const dateFrom = (nextProps.match.params.dateFrom
-            ? new Date(nextProps.match.params.dateFrom)
-            : this.getTodayDate()).toISOString();
-        const dateTo = (nextProps.match.params.dateTo ? new Date(nextProps.match.params.dateTo) : this.getTodayDate())
-            .toISOString();
-        this.props.requestCallLog(dateFrom, dateTo);
+        this.state = { dateFrom: undefined, dateTo: undefined };
     }
 
     private getTodayDate() {
@@ -38,33 +27,80 @@ class CellLog extends React.Component<LogProps, {}> {
         return today;
     }
 
-    public render() {
-        return <div>
-                   <h1>Weather forecast</h1>
-                   <p>This component demonstrates fetching data from the server and working with URL parameters.</p>
-               </div>;
+    private handleDateFromChange(newValue: { startDate: moment.Moment, endDate: moment.Moment }) {
+        const dateFrom = newValue.startDate.toDate();
+        const dateTo = newValue.endDate.toDate();
+
+        this.setState({ dateFrom: dateFrom, dateTo: dateTo });
+        this.props.requestCallLog(dateFrom.toISOString(), dateTo.toISOString());
     }
 
-    private renderForecastsTable() {
-        return <table className='table'>
-                   <thead>
-                   <tr>
-                       <th>Date</th>
-                       <th>Temp. (C)</th>
-                       <th>Temp. (F)</th>
-                       <th>Summary</th>
-                   </tr>
-                   </thead>
-                   <tbody>
-                   {this.props.calls.map((call, index) =>
-                       <tr key={index}>
-                        <td>{call.subscriberId}</td>
-                        <td>{call.timestamp}</td>
-                        <td>{call.duration}</td>
-                    </tr>
-                   )}
-                   </tbody>
-               </table>;
+    public render() {
+        return <div>
+            <h1>Unreal Cell Tracker</h1>
+            <p>Note: Some Subscriber IDS (MSISDN) could match real personal identifying information, however they are completely randomly generated.</p>
+
+            <div className="container-fluid table-bordered" style={{ padding: '15px', margin: '15px' }}>
+                <p>Please select a date range</p>
+                <DateRange
+                    startDate={moment(this.state.dateFrom)}
+                    endDate={moment(this.state.dateTo)}
+                    linkedCalendars={true}
+                    ranges={defaultRanges}
+                    onChange={this.handleDateFromChange.bind(this)}
+                    onInit={this.handleDateFromChange.bind(this)}
+                />
+            </div>
+            <div className="container-fluid table-bordered" style={{ padding: '15px', margin: '15px' }}>
+                <div className="row col-xs-12">
+                    <div className="col-lg-6">
+                        TOP Calls for the period:
+                        <table className='table'>
+                            <thead>
+                                <tr>
+                                    <th>Subscriber ID (MSISDN)</th>
+                                    <th>Total duration</th>
+                                    <th>Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.props.calls.map((call, index) =>
+                                    <tr key={index}>
+                                        <td>{call.subscriberId}</td>
+                                        <td>{call.totalDuration}</td>
+                                        <td>{call.totalCount}</td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+
+                        Total number of calls for the period: {this.props.totalCallCount}
+                    </div>
+
+                    <div className="col-lg-6">
+                        TOP SMS for the period:
+                        <table className='table'>
+                            <thead>
+                                <tr>
+                                    <th>Subscriber ID (MSISDN)</th>
+                                    <th>Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.props.smses.map((call, index) =>
+                                    <tr key={index}>
+                                        <td>{call.subscriberId}</td>
+                                        <td>{call.totalCount}</td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+
+                        Total number of SMS for the period: {this.props.totalSmsCount}
+                    </div>
+                </div>
+            </div>
+        </div>;
     }
 }
 

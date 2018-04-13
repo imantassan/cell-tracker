@@ -8,14 +8,16 @@ export interface LogState {
     dateTo?: string;
     calls: CallLogRecord[];
     smses: SmsLogRecord[];
+    totalCallCount: number;
+    totalSmsCount: number;
 }   
 export interface LogRecord {
     subscriberId: string;
-    timestamp: string;
+    totalCount: string;
 }
 
 export interface CallLogRecord extends LogRecord {
-    duration: string;
+    totalDuration: string;
 }
 
 export interface SmsLogRecord extends LogRecord {
@@ -45,6 +47,7 @@ interface RetrieveCallLogAction {
     dateFrom?: string;
     dateTo?: string;
     log: CallLogRecord[];
+    count: number;
 }
 
 interface RequestSmsLogAction {
@@ -58,6 +61,7 @@ interface RetrieveSmsLogAction {
     dateFrom?: string;
     dateTo?: string;
     log: SmsLogRecord[];
+    count: number;
 }
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
@@ -76,13 +80,13 @@ export const actionCreators = {
             let fetchCallsTask = fetch(`api/CallLog?dateFrom=${ dateFrom }&dateTo=${dateTo}`)
                 .then(response => response.json() as Promise<CallLogResponse>)
                 .then(data => {
-                    dispatch({ type: 'CALLLOG_RETRIEVE', dateFrom: dateFrom, dateTo: dateTo, log: data.topRecords });
+                    dispatch({ type: 'CALLLOG_RETRIEVE', dateFrom: dateFrom, dateTo: dateTo, log: data.topRecords, count: data.totalCount });
                 });
 
             let fetchSmsesTask = fetch(`api/SmsLog?dateFrom=${dateFrom}&dateTo=${dateTo}`)
                 .then(response => response.json() as Promise<SmsLogResponse>)
                 .then(data => {
-                    dispatch({ type: 'SMSLOG_RETRIEVE', dateFrom: dateFrom, dateTo: dateTo, log: data.topRecords });
+                    dispatch({ type: 'SMSLOG_RETRIEVE', dateFrom: dateFrom, dateTo: dateTo, log: data.topRecords, count: data.totalCount });
                 });
 
             addTask(fetchCallsTask); // Ensure server-side prerendering waits for this to complete
@@ -96,7 +100,7 @@ export const actionCreators = {
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 
-const unloadedState: LogState = { calls: [], smses: [], isLoading: false };
+const unloadedState: LogState = { calls: [], smses: [], totalSmsCount: 0, totalCallCount: 0, isLoading: false };
 
 export const reducer: Reducer<LogState> = (state: LogState, incomingAction: Action) => {
     const action = incomingAction as KnownAction;
@@ -108,6 +112,8 @@ export const reducer: Reducer<LogState> = (state: LogState, incomingAction: Acti
                 dateTo: action.dateTo,
                 calls: state.calls,
                 smses: state.smses,
+                totalCallCount: state.totalCallCount,
+                totalSmsCount: state.totalSmsCount,
                 isLoading: true
             };
         case 'CALLLOG_RETRIEVE':
@@ -117,6 +123,8 @@ export const reducer: Reducer<LogState> = (state: LogState, incomingAction: Acti
                     dateTo: action.dateTo,
                     calls: action.log,
                     smses: state.smses,
+                    totalCallCount: action.count,
+                    totalSmsCount: state.totalSmsCount,
                     isLoading: false
                 };
             }
@@ -128,6 +136,8 @@ export const reducer: Reducer<LogState> = (state: LogState, incomingAction: Acti
                     dateTo: action.dateTo,
                     calls: state.calls,
                     smses: action.log,
+                    totalCallCount: state.totalCallCount,
+                    totalSmsCount: action.count,
                     isLoading: false
                 };
             }

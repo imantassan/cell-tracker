@@ -64,6 +64,9 @@ module.exports = (env) => {
                 name: './vendor'
             })
         ],
+        module: {
+            rules: [{ test: /\.css(\?|$)/, use: isDevBuild ? 'css-loader' : 'css-loader?minimize' }]
+        },
         output: {
             libraryTarget: 'commonjs',
             path: path.join(__dirname, './ClientApp/dist')

@@ -4,11 +4,33 @@
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {
+    "@types/daterangepicker": {
+      "version": "2.1.18",
+      "resolved": "https://registry.npmjs.org/@types/daterangepicker/-/daterangepicker-2.1.18.tgz",
+      "integrity": "sha512-MQ6y6OiXDJGdV4NsMxTfQY5pM3/7RnZPNtC/lt702WikOeDOr3rDuQSiFoeq5fi3m7ya0xMw45Yom++cfJnVuA==",
+      "requires": {
+        "@types/jquery": "3.3.1",
+        "moment": "2.22.0"
+      }
+    },
     "@types/history": {
       "version": "4.6.0",
       "resolved": "https://registry.npmjs.org/@types/history/-/history-4.6.0.tgz",
       "integrity": "sha1-CT1n7XgNiJyVQ/bcok6+4La5/EU=",
       "dev": true
+    },
+    "@types/jquery": {
+      "version": "3.3.1",
+      "resolved": "https://registry.npmjs.org/@types/jquery/-/jquery-3.3.1.tgz",
+      "integrity": "sha512-N3h+rzN518yl2xKrW0o6KKdNmWZ+OwG6SoM5TBEQFF0tTv5wXPEsoOuYQ2Kt3/89XbcSZUJLdjiT/2c3BR/ApQ=="
+    },
+    "@types/moment-timezone": {
+      "version": "0.5.4",
+      "resolved": "https://registry.npmjs.org/@types/moment-timezone/-/moment-timezone-0.5.4.tgz",
+      "integrity": "sha512-GXWxTNJaN6A6CSa7+8a0ZGN5yGozW3So7fFHrXE/1c976Nx4hv2470Bx/q6/nmNNOYbcuKT61P0kRNf4cQTirw==",
+      "requires": {
+        "moment": "2.22.0"
+      }
     },
     "@types/node": {
       "version": "8.0.7",
@@ -19,8 +41,25 @@
     "@types/react": {
       "version": "15.0.35",
       "resolved": "https://registry.npmjs.org/@types/react/-/react-15.0.35.tgz",
-      "integrity": "sha1-RnKSPNUC0D4UgNA4FuvFpxn7hto=",
-      "dev": true
+      "integrity": "sha1-RnKSPNUC0D4UgNA4FuvFpxn7hto="
+    },
+    "@types/react-bootstrap-daterangepicker": {
+      "version": "0.0.23",
+      "resolved": "https://registry.npmjs.org/@types/react-bootstrap-daterangepicker/-/react-bootstrap-daterangepicker-0.0.23.tgz",
+      "integrity": "sha512-CLQFGGavI2+bzl5EK8RwmYXMQO4Y9Kk4Y4r8dSzmEauDi5VJpQEz8E3r/fXjiyb3qpDFTy74H4Ldt20ByYaGqg==",
+      "requires": {
+        "@types/daterangepicker": "2.1.18",
+        "@types/react": "15.0.35"
+      }
+    },
+    "@types/react-date-range": {
+      "version": "0.94.2",
+      "resolved": "https://registry.npmjs.org/@types/react-date-range/-/react-date-range-0.94.2.tgz",
+      "integrity": "sha512-gyZstRBX7rDNeq5FeZtAndh7qEHz8IEqIh7OIC2cWZl/j/Xz9QW/ap62v/GF3/YYaEIWQXrqJ5tGkFHJbRM6fA==",
+      "requires": {
+        "@types/moment-timezone": "0.5.4",
+        "@types/react": "15.0.35"
+      }
     },
     "@types/react-dom": {
       "version": "15.5.1",
@@ -734,6 +773,16 @@
       "integrity": "sha1-WjiTlFSfIzMIdaOxUGVldPip63E=",
       "dev": true
     },
+    "bootstrap-daterangepicker": {
+      "version": "2.1.30",
+      "resolved": "https://registry.npmjs.org/bootstrap-daterangepicker/-/bootstrap-daterangepicker-2.1.30.tgz",
+      "integrity": "sha1-+JPb//Wk19+qt1Rg6OppabuJaJo=",
+      "dev": true,
+      "requires": {
+        "jquery": "3.2.1",
+        "moment": "2.22.0"
+      }
+    },
     "brace-expansion": {
       "version": "1.1.8",
       "resolved": "https://registry.npmjs.org/brace-expansion/-/brace-expansion-1.1.8.tgz",
@@ -1044,6 +1093,12 @@
           }
         }
       }
+    },
+    "classnames": {
+      "version": "2.2.5",
+      "resolved": "https://registry.npmjs.org/classnames/-/classnames-2.2.5.tgz",
+      "integrity": "sha1-+zgB1FNGdknvNgPH1hoCvRKb3m0=",
+      "dev": true
     },
     "cliui": {
       "version": "2.1.0",
@@ -1771,7 +1826,7 @@
     "fsevents": {
       "version": "1.1.3",
       "resolved": "https://registry.npmjs.org/fsevents/-/fsevents-1.1.3.tgz",
-      "integrity": "sha512-WIr7iDkdmdbxu/Gh6eKEZJL6KPE74/5MEsf2whTOFNxbIoIixogroLdKYqB6FDav4Wavh/lZdzzd3b2KxIXC5Q==",
+      "integrity": "sha1-EfgjGPX+e7LNIpZaEI6TBiCCFtg=",
       "dev": true,
       "optional": true,
       "requires": {
@@ -3498,6 +3553,11 @@
         "minimist": "0.0.8"
       }
     },
+    "moment": {
+      "version": "2.22.0",
+      "resolved": "https://registry.npmjs.org/moment/-/moment-2.22.0.tgz",
+      "integrity": "sha512-1muXCh8jb1N/gHRbn9VDUBr0GYb8A/aVcHlII9QSB68a50spqEVLIGN6KVmCOnSvJrUhC0edGgKU5ofnGXdYdg=="
+    },
     "ms": {
       "version": "2.0.0",
       "resolved": "https://registry.npmjs.org/ms/-/ms-2.0.0.tgz",
@@ -3507,7 +3567,7 @@
     "nan": {
       "version": "2.10.0",
       "resolved": "https://registry.npmjs.org/nan/-/nan-2.10.0.tgz",
-      "integrity": "sha512-bAdJv7fBLhWC+/Bls0Oza+mvTaNQtP+1RyhhhvD95pgUJz6XM5IzgmxOkItJ9tkoCiplvAnXI1tNmmUD/eScyA==",
+      "integrity": "sha1-ltDNYQ69WNS03pzAxoKM2pnHVI8=",
       "dev": true,
       "optional": true
     },
@@ -4614,6 +4674,23 @@
         "fbjs": "0.8.12",
         "loose-envify": "1.3.1",
         "object-assign": "4.1.1",
+        "prop-types": "15.5.10"
+      }
+    },
+    "react-bootstrap-daterangepicker": {
+      "version": "4.1.0",
+      "resolved": "https://registry.npmjs.org/react-bootstrap-daterangepicker/-/react-bootstrap-daterangepicker-4.1.0.tgz",
+      "integrity": "sha512-BZwwRaWcUDZVVgzQBtbmnbV1jyNNlfI5v7Jxb9FNEJ9FW8m+hzJgDFUMUlvz3VKCe5JNKcv5fKBizIDFSIUu+A==",
+      "dev": true
+    },
+    "react-date-range": {
+      "version": "0.9.4",
+      "resolved": "https://registry.npmjs.org/react-date-range/-/react-date-range-0.9.4.tgz",
+      "integrity": "sha1-2XUVVFoo7ccXtnThaaUKIV1p7BU=",
+      "dev": true,
+      "requires": {
+        "classnames": "2.2.5",
+        "moment": "2.22.0",
         "prop-types": "15.5.10"
       }
     },
