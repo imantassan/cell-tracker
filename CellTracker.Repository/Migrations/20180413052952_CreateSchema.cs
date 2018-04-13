@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using System;
+using System.Collections.Generic;
 
 namespace CellTracker.Repository.Migrations
 {
@@ -11,7 +12,7 @@ namespace CellTracker.Repository.Migrations
                 name: "LogRecords",
                 columns: table => new
                 {
-                    Duration = table.Column<TimeSpan>(nullable: true),
+                    Duration = table.Column<int>(nullable: true),
                     Id = table.Column<Guid>(nullable: false),
                     CellActionType = table.Column<string>(nullable: false),
                     SubscriberId = table.Column<string>(nullable: true),
@@ -21,6 +22,11 @@ namespace CellTracker.Repository.Migrations
                 {
                     table.PrimaryKey("PK_LogRecords", x => x.Id);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LogRecords_SubscriberId_CellActionType",
+                table: "LogRecords",
+                columns: new[] { "SubscriberId", "CellActionType" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

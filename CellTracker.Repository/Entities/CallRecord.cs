@@ -4,6 +4,6 @@ namespace CellTracker.Repository.Entities
 {
     public class CallRecord : LogRecord
     {
-        public TimeSpan Duration { get; set; }
+        public int Duration { get; set; }
     }
 }

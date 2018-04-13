@@ -47,7 +47,7 @@ namespace CellTracker.Repository.Migrations
                 {
                     b.HasBaseType("CellTracker.Repository.Entities.LogRecord");
 
-                    b.Property<TimeSpan>("Duration");
+                    b.Property<int>("Duration");
 
                     b.ToTable("LogRecords");
 

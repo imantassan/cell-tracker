@@ -12,7 +12,7 @@ using System;
 namespace CellTracker.Repository.Migrations
 {
     [DbContext(typeof(LogDbContext))]
-    [Migration("20180412091521_CreateSchema")]
+    [Migration("20180413052952_CreateSchema")]
     partial class CreateSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,8 @@ namespace CellTracker.Repository.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("SubscriberId", "CellActionTypeString");
+
                     b.ToTable("LogRecords");
 
                     b.HasDiscriminator<string>("CellActionTypeString").HasValue("LogRecord");
@@ -46,14 +48,14 @@ namespace CellTracker.Repository.Migrations
                 {
                     b.HasBaseType("CellTracker.Repository.Entities.LogRecord");
 
-                    b.Property<TimeSpan>("Duration");
+                    b.Property<int>("Duration");
 
                     b.ToTable("LogRecords");
 
                     b.HasDiscriminator().HasValue("Call");
                 });
 
-            modelBuilder.Entity("CellTracker.Repository.Entities.ShortMessageRecord", b =>
+            modelBuilder.Entity("CellTracker.Repository.Entities.SmsRecord", b =>
                 {
                     b.HasBaseType("CellTracker.Repository.Entities.LogRecord");
 
