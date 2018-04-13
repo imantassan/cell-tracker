@@ -13,8 +13,9 @@ namespace CellTracker.Services
         {
         }
 
-        protected override IOrderedQueryable<CallRecord> ApplyOrdering(IQueryable<CallRecord> query) => query.OrderByDescending(x => x.Duration);
+        protected override IOrderedQueryable<IGrouping<string, CallRecord>> ApplyGroupingAndOrdering(IQueryable<CallRecord> query) => query.GroupBy(x => x.SubscriberId)
+            .OrderByDescending(x => x.Sum(c => c.Duration));
 
-        protected override CallRecordDto ConvertToDto(CallRecord entity) => CallRecordDto.FromEntity(entity);
+        protected override CallRecordDto ConvertToDto(IGrouping<string, CallRecord> entity) => CallRecordDto.FromEntityGroup(entity);
     }
 }

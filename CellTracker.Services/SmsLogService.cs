@@ -14,8 +14,11 @@ namespace CellTracker.Services
         {
         }
 
-        protected override IOrderedQueryable<SmsRecord> ApplyOrdering(IQueryable<SmsRecord> query) => query.OrderByDescending(x => x.Timestamp);
+        protected override IOrderedQueryable<IGrouping<string, SmsRecord>> ApplyGroupingAndOrdering(IQueryable<SmsRecord> query)
+            => query
+                .GroupBy(x => x.SubscriberId)
+                .OrderByDescending(x => x.Count());
 
-        protected override SmsRecordDto ConvertToDto(SmsRecord entity) => SmsRecordDto.FromEntity(entity);
+        protected override SmsRecordDto ConvertToDto(IGrouping<string, SmsRecord> entity) => SmsRecordDto.FromEntityGroup(entity);
     }
 }

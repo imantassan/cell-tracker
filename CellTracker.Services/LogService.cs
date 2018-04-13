@@ -18,13 +18,13 @@ namespace CellTracker.Services
             this.repository = repository;
         }
 
-        protected abstract IOrderedQueryable<TEntity> ApplyOrdering(IQueryable<TEntity> query);
+        protected abstract IOrderedQueryable<IGrouping<string, TEntity>> ApplyGroupingAndOrdering(IQueryable<TEntity> query);
 
-        protected abstract TDto ConvertToDto(TEntity entity);
+        protected abstract TDto ConvertToDto(IGrouping<string, TEntity> group);
 
         public IReadOnlyCollection<TDto> GetTopForPeriod(DateTimeOffset dateFrom, DateTimeOffset dateTo, int count)
         {
-            return ApplyOrdering(
+            return ApplyGroupingAndOrdering(
                     repository
                         .Find(x => x.Timestamp >= dateFrom && x.Timestamp <= dateTo))
                 .Take(count)

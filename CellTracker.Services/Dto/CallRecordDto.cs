@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 using CellTracker.Repository.Entities;
 
@@ -8,16 +9,16 @@ namespace CellTracker.Services.Dto
     {
         public string SubscriberId { get; set; }
 
-        public DateTimeOffset Timestamp { get; set; }
+        public TimeSpan TotalDuration { get; set; }
 
-        public TimeSpan Duration { get; set; }
+        public int TotalCount { get; set; }
 
-        public static CallRecordDto FromEntity(CallRecord entity)
+        public static CallRecordDto FromEntityGroup(IGrouping<string, CallRecord> entity)
             => new CallRecordDto
             {
-                Timestamp = entity.Timestamp,
-                Duration = entity.Duration,
-                SubscriberId = entity.SubscriberId
+                TotalDuration = TimeSpan.FromSeconds(entity.Sum(x => x.Duration)),
+                TotalCount = entity.Count(),
+                SubscriberId = entity.Key
             };
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 using CellTracker.Repository.Entities;
 
@@ -8,13 +9,13 @@ namespace CellTracker.Services.Dto
     {
         public string SubscriberId { get; set; }
 
-        public DateTimeOffset Timestmap { get; set; }
+        public int TotalCount { get; set; }
 
-        public static SmsRecordDto FromEntity(SmsRecord entity)
+        public static SmsRecordDto FromEntityGroup(IGrouping<string, SmsRecord> entity)
             => new SmsRecordDto
             {
-                SubscriberId = entity.SubscriberId,
-                Timestmap = entity.Timestamp
+                SubscriberId = entity.Key,
+                TotalCount = entity.Count()
             };
     }
 }
